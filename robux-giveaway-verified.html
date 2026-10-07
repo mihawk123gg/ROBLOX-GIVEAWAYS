@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>300 Robux Giveaway (Independent)</title>
+<style>
+:root{--bg:#f4f4f5;--card:#fff;--ink:#1f2023;--muted:#62666d;--line:#e3e4e7;--red:#e2231a;--red-soft:#fdecea;--green:#18a558;--green-soft:#e6f6ed;--shadow:0 10px 30px rgba(31,32,35,.08)}
+@media (prefers-color-scheme:dark){:root{--bg:#17181a;--card:#232528;--ink:#f3f4f5;--muted:#a3a8b0;--line:#34373c;--red-soft:#3a1d1b;--green-soft:#173326;--shadow:0 10px 30px rgba(0,0,0,.35)}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;font-size:18px;line-height:1.5;display:flex;flex-direction:column;align-items:center;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(40px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(600px 300px at 85% -5%,var(--red-soft),transparent 70%);pointer-events:none}
+canvas#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+header{width:100%;max-width:640px;display:flex;align-items:center;gap:10px;font-weight:900;margin-bottom:24px;position:relative}
+.logo{width:34px;height:34px;border-radius:9px;background:var(--red);display:grid;place-items:center;transform:rotate(-8deg)}
+.logo i{width:14px;height:14px;background:#fff;border-radius:3px;display:block}
+.badge{margin-left:auto;font-size:.75rem;font-weight:800;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--card)}
+main{width:100%;max-width:640px;position:relative}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:clamp(24px,5vw,44px)}
+.screen[hidden]{display:none}
+h1{font-size:clamp(2rem,7vw,3rem);line-height:1.1;margin:0 0 12px;font-weight:900;letter-spacing:-.02em}
+h1.md{font-size:clamp(1.7rem,6vw,2.3rem)}
+.sub{color:var(--muted);margin:0 0 28px;font-size:1.1rem}
+.prize{display:inline-flex;gap:8px;background:var(--red-soft);color:var(--red);font-weight:800;padding:6px 14px;border-radius:99px;font-size:.95rem;margin-bottom:18px}
+label{display:block;font-weight:800;margin-bottom:8px}
+input{width:100%;font:inherit;font-size:1.15rem;padding:16px 18px;border-radius:16px;border:2px solid var(--line);background:var(--bg);color:var(--ink);transition:border-color .2s,box-shadow .2s}
+input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 4px var(--red-soft)}
+input[aria-invalid="true"]{border-color:var(--red)}
+.err{color:var(--red);font-weight:700;font-size:.95rem;min-height:1.4em;margin:8px 0 0}
+button{font:inherit;font-weight:900;font-size:1.15rem;width:100%;margin-top:12px;padding:17px 22px;border:0;border-radius:16px;background:var(--red);color:#fff;cursor:pointer;box-shadow:0 6px 0 #a8160f;transition:transform .15s,box-shadow .15s}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 0 #a8160f}
+button:active{transform:translateY(4px);box-shadow:0 2px 0 #a8160f}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button.ghost{background:transparent;color:var(--muted);box-shadow:none;font-size:1rem;font-weight:700;margin-top:8px}
+button.ghost:hover{color:var(--ink);transform:none;box-shadow:none}
+.note{color:var(--muted);font-size:.9rem;margin:18px 0 0}
+.center{text-align:center}
+/* steps */
+.steps{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px}
+.steps li{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--line);border-radius:16px;font-weight:800;color:var(--muted);opacity:.45;transition:opacity .3s,color .3s,border-color .3s,background .3s}
+.steps li.active{opacity:1;color:var(--ink)}
+.steps li.done{opacity:1;color:var(--green);border-color:var(--green);background:var(--green-soft)}
+.ico{width:26px;height:26px;flex:none;position:relative}
+.steps li.active .ico::before{content:"";position:absolute;inset:0;border-radius:50%;border:3px solid var(--line);border-top-color:var(--red);animation:spin .8s linear infinite}
+.steps li.done .ico::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green)}
+.steps li.done .ico::after{content:"";position:absolute;left:8px;top:4px;width:6px;height:12px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* check */
+.tick{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
+.tick svg{width:38px;height:38px;stroke:var(--green);fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:draw .5s .25s forwards}
+.tick.bad{background:var(--red-soft)}
+.tick.bad svg{stroke:var(--red)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1}}
+/* user card */
+.user{display:flex;align-items:center;gap:18px;border:1px solid var(--line);border-radius:20px;padding:16px;margin:20px 0;background:var(--bg);animation:slide .6s .1s both cubic-bezier(.2,.9,.3,1)}
+@keyframes slide{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+.avatar{width:96px;height:96px;border-radius:18px;background:var(--line);object-fit:cover;flex:none}
+.user dl{margin:0;min-width:0}
+.user dt{font-size:.8rem;color:var(--muted);font-weight:700}
+.user dd{margin:0 0 6px;font-weight:900;word-break:break-all}
+.user dd.big{font-size:1.3rem}
+.rows{margin:22px 0;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.row{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;flex-wrap:wrap}
+.row+.row{border-top:1px solid var(--line)}
+.row span{color:var(--muted)}
+.row b{font-weight:900}
+.timer-title{text-align:center;color:var(--muted);font-weight:700;margin:22px 0 8px}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.unit{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px 4px;text-align:center}
+.unit b{display:block;font-size:clamp(1.6rem,7vw,2.2rem);line-height:1.1;font-weight:900;font-variant-numeric:tabular-nums}
+.unit span{font-size:.8rem;color:var(--muted);font-weight:700}
+.msg{background:var(--bg);border-radius:16px;padding:16px 18px;margin:22px 0;color:var(--muted);font-size:1rem}
+.status{border:2px solid var(--green);background:var(--green-soft);border-radius:20px;padding:18px 20px}
+.status h2{margin:0 0 10px;font-size:1rem;font-weight:800;color:var(--muted)}
+.status p{margin:4px 0;font-weight:800}
+.errcard{border:2px solid var(--red);background:var(--red-soft);border-radius:20px;padding:18px 20px;margin-top:18px;text-align:left}
+footer{max-width:640px;text-align:center;color:var(--muted);font-size:.85rem;margin-top:24px;position:relative}
+@media (max-width:420px){.user{flex-direction:column;text-align:center}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.tick svg{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+<header><div class="logo" aria-hidden="true"><i></i></div><span>Robux Giveaway</span><span class="badge">Independent giveaway</span></header>
+<main>
+  <!-- 1. Entry -->
+  <section class="card screen" id="s1">
+    <div class="prize">🎁 300 Robux</div>
+    <h1>🎁 300 Robux Giveaway</h1>
+    <p class="sub">Enter your Roblox username to register for the giveaway.</p>
+    <form id="form" novalidate>
+      <label for="u">Roblox username</label>
+      <input id="u" type="text" placeholder="Enter your Roblox username" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="20" aria-describedby="err">
+      <p class="err" id="err" role="alert"></p>
+      <button type="submit">Enter Giveaway</button>
+    </form>
+    <p class="note">🔒 We will never ask for your Roblox password.</p>
+  </section>
+
+  <!-- 2. Verifying -->
+  <section class="card screen" id="sv" hidden>
+    <h1 class="md center">Verifying username</h1>
+    <p class="sub center" style="margin:0">Looking up <b id="vname"></b> in Roblox's public directory.</p>
+    <ol class="steps" aria-live="polite">
+      <li id="st1"><span class="ico"></span><span>Searching Roblox...</span></li>
+      <li id="st2"><span class="ico"></span><span>Checking username...</span></li>
+      <li id="st3"><span class="ico"></span><span id="st3t">Roblox account found ✓</span></li>
+    </ol>
+  </section>
+
+  <!-- 3. Error -->
+  <section class="card screen center" id="se" hidden>
+    <div class="tick bad"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+    <h1 class="md" id="et"></h1>
+    <div class="errcard"><span id="em"></span></div>
+    <button type="button" id="retry">Try again</button>
+  </section>
+
+  <!-- 4. Found -->
+  <section class="card screen center" id="sf" hidden>
+    <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h1 class="md">✓ Roblox Account Found</h1>
+    <div class="user" style="text-align:left">
+      <img class="avatar" id="fav" alt="Roblox avatar" width="96" height="96">
+      <dl><dt>Username</dt><dd class="big" id="fn"></dd><dt>User ID</dt><dd id="fi"></dd></dl>
+    </div>
+  </section>
+
+  <!-- 5. Confirmation -->
+  <section class="card screen" id="s2" hidden>
+    <div class="center">
+      <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>🎉 Account Verified</h1>
+    </div>
+    <div class="user">
+      <img class="avatar" id="cav" alt="Roblox avatar" width="96" height="96">
+      <dl><dt>Username:</dt><dd class="big" id="cn"></dd><dt>Roblox User ID:</dt><dd id="ci"></dd></dl>
+    </div>
+    <div class="rows">
+      <div class="row"><span>Prize:</span><b>🎁 300 Robux</b></div>
+      <div class="row"><span>Scheduled Giveaway Date:</span><b>📅 9 October 2026</b></div>
+    </div>
+    <div class="timer-title" id="tt">Countdown to 9 October 2026</div>
+    <div class="timer" role="timer">
+      <div class="unit"><b id="d">0</b><span>days</span></div>
+      <div class="unit"><b id="h">0</b><span>hours</span></div>
+      <div class="unit"><b id="m">0</b><span>minutes</span></div>
+      <div class="unit"><b id="s">0</b><span>seconds</span></div>
+    </div>
+    <p class="msg">Your giveaway entry has been recorded. If you are selected/eligible according to the giveaway rules, the 300 Robux prize will be sent on 9 October 2026. A successful lookup only confirms that this username exists on Roblox.</p>
+    <div class="status">
+      <h2>Giveaway Status:</h2>
+      <p>🟢 Roblox Account Found</p>
+      <p>🟢 Username Verified</p>
+      <p>🎁 Giveaway Entry Registered</p>
+      <p>📅 Scheduled Date: 9 October 2026</p>
+    </div>
+    <button class="ghost" id="back" type="button">Use a different username</button>
+  </section>
+</main>
+<footer>This is an independent giveaway. It is not run, sponsored, endorsed or verified by Roblox Corporation. Roblox is a trademark of its owner. Only a username is requested: never a password, cookie, 2FA or email code, or payment details.</footer>
+
+<script>
+(function(){
+  /* Set this to the URL of the lookup proxy (see roblox-lookup-worker.js). */
+  var PROXY_URL = "";
+
+  var KEY="robux-giveaway-entry", TARGET=new Date(2026,9,9,0,0,0).getTime();
+  var $=function(i){return document.getElementById(i)};
+  var screens=["s1","sv","se","sf","s2"], timerId=null, busy=false;
+  function go(id){screens.forEach(function(s){$(s).hidden=s!==id});window.scrollTo({top:0})}
+  var wait=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
+
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+  function save(v){try{v?localStorage.setItem(KEY,JSON.stringify(v)):localStorage.removeItem(KEY)}catch(e){}}
+
+  function formatErr(n){
+    if(n.length<3||n.length>20) return "Usernames are 3–20 characters long.";
+    if(!/^[A-Za-z0-9_]+$/.test(n)) return "Use only letters, numbers and one underscore.";
+    if(n[0]==="_"||n[n.length-1]==="_") return "Usernames can't start or end with an underscore.";
+    if((n.match(/_/g)||[]).length>1) return "Usernames can only contain one underscore.";
+    return "";
+  }
+
+  /* Real lookup through the proxy; throws on any failure so we never fake a result */
+  async function lookup(name){
+    if(!PROXY_URL) throw new Error("no proxy");
+    var ctl=new AbortController(), t=setTimeout(function(){ctl.abort()},10000);
+    try{
+      var r=await fetch(PROXY_URL+(PROXY_URL.indexOf("?")>-1?"&":"?")+"username="+encodeURIComponent(name),{signal:ctl.signal});
+      if(!r.ok) throw new Error("http "+r.status);
+      var d=await r.json();
+      if(d.found===false) return null;
+      if(d.found!==true||typeof d.id!=="number"||typeof d.name!=="string") throw new Error("bad response");
+      var img=null;
+      try{var u=new URL(d.imageUrl);if(u.protocol==="https:"&&/\.rbxcdn\.com$/.test(u.hostname)) img=u.href}catch(e){}
+      return {id:d.id,name:d.name,imageUrl:img};
+    } finally { clearTimeout(t); }
+  }
+
+  function setSteps(a,b,c){
+    [["st1",a],["st2",b],["st3",c]].forEach(function(p){$(p[0]).className=p[1]||""});
+  }
+  function loadImg(el,url){
+    return new Promise(function(res){
+      if(!url){el.removeAttribute("src");el.style.visibility="hidden";return res()}
+      el.style.visibility="visible";
+      el.onload=function(){res()};el.onerror=function(){el.style.visibility="hidden";res()};
+      el.src=url;
+    });
+  }
+
+  function showError(title,msg){$("et").textContent=title;$("em").textContent=msg;go("se")}
+
+  async function verify(name){
+    if(busy) return; busy=true;
+    $("vname").textContent=name;setSteps("active","","");go("sv");
+    var p=lookup(name).then(function(v){return{v:v}},function(e){return{e:e}});
+    await wait(850);setSteps("done","active","");
+    var out=await p; await wait(850);
+    if(out.e){busy=false;return showError("⚠️ Verification unavailable","Unable to verify right now. Please try again later.")}
+    if(!out.v){busy=false;return showError("❌ Roblox account not found","We couldn't find a Roblox account with this username. Please check the spelling and try again.")}
+    var v=out.v;
+    setSteps("done","done","done");await wait(700);
+    $("fn").textContent=v.name;$("fi").textContent=String(v.id);
+    await loadImg($("fav"),v.imageUrl);
+    go("sf");await wait(2200);
+    save(v);showConfirm(v,true);busy=false;
+  }
+
+  function showConfirm(v,celebrate){
+    $("cn").textContent=v.name;$("ci").textContent=String(v.id);
+    loadImg($("cav"),v.imageUrl);
+    go("s2");tick();clearInterval(timerId);timerId=setInterval(tick,1000);
+    if(celebrate) confetti();
+  }
+
+  function tick(){
+    var t=TARGET-Date.now(),p=function(n){return String(n).padStart(2,"0")};
+    if(t<=0){["d","h","m","s"].forEach(function(i){$(i).textContent="0"});$("tt").textContent="Gift date: 9 October 2026";clearInterval(timerId);return}
+    $("d").textContent=Math.floor(t/864e5);
+    $("h").textContent=p(Math.floor(t%864e5/36e5));
+    $("m").textContent=p(Math.floor(t%36e5/6e4));
+    $("s").textContent=p(Math.floor(t%6e4/1e3));
+  }
+
+  $("form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=$("u").value.trim(),m=formatErr(n);
+    $("err").textContent=m;$("u").setAttribute("aria-invalid",m?"true":"false");
+    if(m){$("u").focus();return}
+    verify(n);
+  });
+  $("u").addEventListener("input",function(){$("err").textContent="";$("u").setAttribute("aria-invalid","false")});
+  $("retry").addEventListener("click",function(){go("s1");$("u").focus()});
+  $("back").addEventListener("click",function(){save(null);clearInterval(timerId);$("u").value="";go("s1");$("u").focus()});
+
+  var cv=$("fx"),cx=cv.getContext("2d");
+  function confetti(){
+    if(matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+    var dpr=devicePixelRatio||1,W=cv.width=innerWidth*dpr,H=cv.height=innerHeight*dpr;
+    var cols=["#e2231a","#ffb3ae","#ffffff","#8a8d93","#18a558"],ps=[];
+    for(var i=0;i<70;i++) ps.push({x:Math.random()*W,y:-Math.random()*H*.4,w:(6+Math.random()*6)*dpr,h:(4+Math.random()*5)*dpr,vx:(Math.random()-.5)*2*dpr,vy:(1.5+Math.random()*2.5)*dpr,r:Math.random()*6,vr:(Math.random()-.5)*.2,c:cols[i%5]});
+    var st=performance.now();
+    (function f(now){
+      var el=now-st;cx.clearRect(0,0,W,H);var a=Math.max(0,1-Math.max(0,el-2500)/1000);
+      ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;cx.save();cx.globalAlpha=a;cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});
+      if(el<3500) requestAnimationFrame(f); else cx.clearRect(0,0,W,H);
+    })(st);
+  }
+
+  var saved=load();
+  if(saved&&typeof saved.id==="number"&&typeof saved.name==="string") showConfirm(saved,false);
+})();
+</script>
+</body>
+</html>
